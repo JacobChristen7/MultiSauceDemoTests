@@ -6,7 +6,8 @@ import CheckoutPage from './checkoutPage.js'
 import Login from './login.js'
 
 
-class Navigate extends DefaultPage {
+class InventoryNavigate extends DefaultPage {
+
     get CartNav () {
         return $('.shopping_cart_link')
     }
@@ -38,18 +39,27 @@ class Navigate extends DefaultPage {
     get FinishCheck () {
         return $('span[data-test="title"]')
     }
+    
+    get CartIconCheck () {
+        return $('.shopping_cart_badge')
+    }
 
+    get FleeceJacketCheck () {
+        return $('#item_5_title_link')
+    }
 
-    async navToCart () {
-        await Login.login('standard_user', 'secret_sauce')
+    get BoltTShirtCheck () {
+        return $('#item_1_title_link')
+    }
+    
+    async navigateToCart() {
         await this.CartNav.click();
         await expect(this.CartCheck).toBeExisting()
         await expect(this.CartCheck).toHaveText(
             expect.stringContaining('Your Cart'))
     }
 
-    async navToCheckout () {
-        await this.navToCart();
+    async navigateToCheckout() {
         await this.CheckoutNav.click();
         await expect(this.CheckoutCheck).toBeExisting()
         await expect(this.CheckoutCheck).toHaveText(
@@ -57,16 +67,22 @@ class Navigate extends DefaultPage {
     }
 
     async navToContinue () {
-        await this.navToCheckout();
-        await CheckoutPage.fillForm();
         await this.ContinueNav.click();
         await expect(this.ContinueCheck).toBeExisting()
         await expect(this.ContinueCheck).toHaveText(
             expect.stringContaining('Checkout: Overview'))
+        await expect(this.CartIconCheck).toBeExisting()
+        await expect(this.CartIconCheck).toHaveText(
+            expect.stringContaining('2'))
+        await expect(this.BoltTShirtCheck).toBeExisting()
+        await expect(this.BoltTShirtCheck).toHaveText(
+            expect.stringContaining('Sauce Labs Bolt T-Shirt'))
+        await expect(this.FleeceJacketCheck).toBeExisting()
+        await expect(this.FleeceJacketCheck).toHaveText(
+            expect.stringContaining('Sauce Labs Fleece Jacket'))
     }
 
     async navToFinish () {
-        await this.navToContinue();
         await this.FinishNav.click();
         await expect(this.FinishCheck).toBeExisting()
         await expect(this.FinishCheck).toHaveText(
@@ -74,4 +90,4 @@ class Navigate extends DefaultPage {
     }
 }
 
-export default new Navigate();
+export default new InventoryNavigate();
