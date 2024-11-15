@@ -19,9 +19,9 @@ class CheckoutPage {
     }
 
     async fillForm () {
-        await this.FirstNameInput.setValue(temp)
-        await this.LastNameInput.setValue(temp)
-        await this.PostalCodeInput.setValue(temp)
+        await this.FirstNameInput.setValue('temp')
+        await this.LastNameInput.setValue('temp')
+        await this.PostalCodeInput.setValue('temp')
     }
 }
 

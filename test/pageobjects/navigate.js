@@ -1,8 +1,9 @@
 import { browser } from '@wdio/globals'
 import { $ } from '@wdio/globals'
 import { expect } from '@wdio/globals'
-import DefaultPage from './defaultPage.js';
-import CheckoutPage from './pageobjects/checkoutPage.js';
+import DefaultPage from './defaultPage.js'
+import CheckoutPage from './checkoutPage.js'
+import Login from './login.js'
 
 
 class Navigate extends DefaultPage {
@@ -40,6 +41,7 @@ class Navigate extends DefaultPage {
 
 
     async navToCart () {
+        await Login.login('standard_user', 'secret_sauce')
         await this.CartNav.click();
         await expect(this.CartCheck).toBeExisting()
         await expect(this.CartCheck).toHaveText(
@@ -56,7 +58,7 @@ class Navigate extends DefaultPage {
 
     async navToContinue () {
         await this.navToCheckout();
-        await 
+        await CheckoutPage.fillForm();
         await this.ContinueNav.click();
         await expect(this.ContinueCheck).toBeExisting()
         await expect(this.ContinueCheck).toHaveText(
@@ -66,9 +68,9 @@ class Navigate extends DefaultPage {
     async navToFinish () {
         await this.navToContinue();
         await this.FinishNav.click();
-        await expect(this.FinishCheckCheck).toBeExisting()
-        await expect(this.FinishCheckCheck).toHaveText(
-            expect.stringContaining('Checkout: Overview'))
+        await expect(this.FinishCheck).toBeExisting()
+        await expect(this.FinishCheck).toHaveText(
+            expect.stringContaining('Checkout: Complete!'))
     }
 }
 

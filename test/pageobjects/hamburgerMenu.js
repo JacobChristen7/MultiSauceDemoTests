@@ -41,12 +41,13 @@ class HamburgerMenu extends DefaultPage {
         await this.CloseBurgerMenu.click();
         await this.OpenBurgerMenu.click();
         await this.AllItemsOption.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html');
         await this.AboutOption.click();
+        await expect(browser).toHaveUrl('https://saucelabs.com/');
         await browser.back();
         await this.OpenBurgerMenu.click();
         await this.ResetAppStateOption.click();
         await this.LogoutOption.click();
-
     }
 
     async hamburgerMenu () {
@@ -54,14 +55,15 @@ class HamburgerMenu extends DefaultPage {
         await this.CloseBurgerMenu.click();
         await this.OpenBurgerMenu.click();
         await this.AllItemsOption.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html');
         await browser.back();
         await this.OpenBurgerMenu.click();
         await this.AboutOption.click();
+        await expect(browser).toHaveUrl('https://saucelabs.com/');
         await browser.back();
         await this.OpenBurgerMenu.click();
         await this.ResetAppStateOption.click();
         await this.LogoutOption.click();
-
     }
 }
 
